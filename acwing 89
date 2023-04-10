@@ -1,0 +1,18 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+long long binpow(long long a,long long b,long long p){
+    long long ans=1%p;
+    for(;b;b>>=1){
+        if(b&1) ans=(long long)ans*a%p; 
+        a=(long long)a*a%p;  // 此时a的作用为 计算每一个位置的值，即便不录入计算，但是也需要为下一次的计算做准备，依次不断计算其值
+    }
+    return ans;
+}
+int main(){
+    int  a,b,p;
+    std::cin>>a>>b>>p;
+    long long ans1=binpow(a,b,p);
+    std::cout<<ans1;
+    return 0;
+}
