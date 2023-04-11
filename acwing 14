@@ -1,0 +1,19 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+class Solution {
+public:
+    int duplicateInArray(std::vector<int>& nums) {
+        int l=1,r,mid;
+        r=nums.size()-1;
+        while(l<r){
+            int s=0;
+            mid = l+r>>1;
+            for( auto x : nums ) s+= x>=l&&x<=mid;
+            if( s > mid - l +1) r= mid ;  //mid实际上是为一个位置，不能当作其数量来判断来,s的判断为是否大于右半区间的数的数量
+            else  l=mid+1;
+
+        }
+        return r;
+    }
+};
