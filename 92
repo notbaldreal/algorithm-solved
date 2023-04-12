@@ -1,0 +1,29 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+/*
+ * 递归类的暴力枚举选择题，如果属于是选择性问题，需要对选或者是不选进行遍历
+ * 则我们应该应该对于选和不选在递归下降的过程中并行选择
+ *      在这题之中，如果是不选，则没有任何的操作，则直接进行下一次的递归
+ *
+ * */
+std::vector<int>a;  //去存储结果
+int n;
+void calc(int d){
+    if(d>n){
+        for(int i=0;i<a.size();i++) std::cout<<a[i]<<" ";
+        std::cout<<std::endl;
+        return ;
+    }
+    //不选择该位置时候，也就是说 0-n之中，该位置的选择情况为1
+    calc(d+1);
+    //选择该位置的情况
+    a.push_back(d);
+    calc(d+1);
+    a.pop_back();
+}
+int main(){
+    std::cin>>n;
+    calc(1);
+    return 0;
+}
