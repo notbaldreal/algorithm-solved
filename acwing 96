@@ -1,0 +1,18 @@
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#define ll long long
+const int N =15;
+ll d[N],f[N]; //f[N]为三圆盘汉诺塔的最小步数 ,d为 4阶汉诺塔的最小步骤数
+int main(){
+    int n=12;
+    memset(f,0x3f,sizeof(f));
+    d[1]=f[1]=1;
+    for(int i=2;i<=n;i++) d[i]= (2*d[i-1])+1;
+    for(int i=2;i<=n;i++)  // i为盘数，j为每次放到相较于3阶的汉诺塔多余的地方的数目，可以为1，可以为...i，只要小于i即可，因为i为总数
+        for(int j=1;j<i;j++)
+            f[i]=std::min(f[i],2*f[j]+d[i-j]);
+    //因为将 j个盘子放入到额外的位置上的数目不好说，其可能会多样化，所以我们需要去求解其最小值
+    for(int i=1;i<=n;i++) std::cout<<f[i]<<std::endl;
+    return 0;
+}
